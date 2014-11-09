@@ -5,7 +5,7 @@ use strict;
 use warnings FATAL => 'all';
 
 use base 'Exporter';
-our @EXPORT_OK = qw( virgule to_monetary_number_format roundnear );
+our @EXPORT_OK = qw( commas to_monetary_number_format roundnear );
 
 use Carp qw(cluck);
 use Scalar::Util qw(looks_like_number);
@@ -17,16 +17,16 @@ Format::Util::Numbers - Miscellaneous routines to do with manipulating number fo
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 
 =head1 SYNOPSIS
 
-    use BOM::Utility::Format::Numbers qw( virgule to_monetary_number_format roundnear );
+    use BOM::Utility::Format::Numbers qw( commas to_monetary_number_format roundnear );
     ...
 
 =head1 EXPORT
@@ -69,22 +69,22 @@ Round a number near the precision of the supplied one.
     }
 }
 
-=head2 virgule
+=head2 commas
 
 Produce a more human readbale number with a provided number of decimal points
 
-    virgule(12345.679, 1) => 12,345.7
+    commas(12345.679, 1) => 12,345.7
 
 =cut
 
-sub virgule {
+sub commas {
     my ($x, $decimal_point) = @_;
 
     my $output = $x;
     return $output if not looks_like_number($x);
 
     if ($x < 0) {
-        $output = '-' . virgule(-1 * $x, $decimal_point);
+        $output = '-' . commas(-1 * $x, $decimal_point);
     } else {
         # Split non-decimal and decimal value
         $x = $x * 1;
