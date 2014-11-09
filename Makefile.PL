@@ -12,15 +12,35 @@ WriteMakefile(
     PL_FILES         => {},
     MIN_PERL_VERSION => 5.006,
     CONFIGURE_REQUIRES => {
-        'ExtUtils::MakeMaker' => 0,
+        'ExtUtils::MakeMaker' => 0
     },
     BUILD_REQUIRES => {
-        'Test::More' => 0,
+        'Test::More'          => 0,
+        'Test::Exception'     => 0,
+        'Test::NoWarnings'    => 0,
+        'Math::BigInt'        => 0,
+        'Scalar::Util'        => 0,
+        'POSIX'               => 0,
+        'Encode'              => 0
     },
     PREREQ_PM => {
-        #'ABC'              => 1.6,
-        #'Foo::Bar::Module' => 5.0401,
+        'Test::More'          => 0,
+        'Test::Exception'     => 0,
+        'Test::NoWarnings'    => 0,
+        'Math::BigInt'        => 0,
+        'Scalar::Util'        => 0,
+        'POSIX'               => 0,
+        'Encode'              => 0
     },
+    (! eval { ExtUtils::MakeMaker->VERSION(6.46) } ? () :
+        (META_ADD => {
+            resources => {
+                homepage   => 'https://github.com/binary-com/perl-Format-Util',
+                repository => 'git@github.com:binary-com/perl-Format-Util.git',
+                bugtracker => 'http://rt.cpan.org/NoAuth/Bugs.html?Dist=Format-Util',
+            },
+        })
+    ),
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Format-Util-*' },
 );
