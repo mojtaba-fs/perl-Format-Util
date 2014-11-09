@@ -5,3 +5,6 @@ Revision history for Format-Util
 
 0.02    09/11/2014
         Make file Improvements
+
+0.03  	09/11/2014
+		method virgule is being changed to commas
