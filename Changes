@@ -8,3 +8,6 @@ Revision history for Format-Util
 
 0.03  	09/11/2014
 		method virgule is being changed to commas
+
+0.04  	13/11/2014
+		CPAN test report fails fixes
