@@ -10,7 +10,7 @@ Format::Util - Miscellaneous routines to do with manipulating with strings and n
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
