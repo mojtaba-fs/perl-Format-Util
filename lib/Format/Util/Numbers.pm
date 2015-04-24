@@ -21,12 +21,12 @@ Version 0.03
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 
 =head1 SYNOPSIS
 
-    use BOM::Utility::Format::Numbers qw( commas to_monetary_number_format roundnear );
+    use Format::Util::Numbers qw( commas to_monetary_number_format roundnear );
     ...
 
 =head1 EXPORT
