@@ -8,7 +8,7 @@
 **SYNOPSIS**
 
     use Format::Util::Strings qw( defang defang_lite set_selected_item )
-    use Format::Util::Numbers qw( virgule to_monetary_number_format roundnear )
+    use Format::Util::Numbers qw( commas to_monetary_number_format roundnear )
 
 **METHODS**
 
@@ -41,11 +41,11 @@
 
     If HTML given, the altered HTML
 
-- **virgule($number, $decimal_point)**
+- **commas($number, $decimal_point)**
 
     Produce a more human readbale number with a provided number of decimal points
 
-    virgule(12345.679, 1) => 12,345.7
+    commas(12345.679, 1) => 12,345.7
 
 - **to_monetary_number_format($number,$remove_decimal_for_ints)**
 
