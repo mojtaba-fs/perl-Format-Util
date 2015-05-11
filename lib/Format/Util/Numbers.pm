@@ -132,7 +132,8 @@ sub to_monetary_number_format {
     if (looks_like_number($text)) {
         $text = reverse sprintf "%.2f", $text;
         $text=~s/(\d{3})/$1,/g;
-        $text=~s/^,|,$|,-$//g;
+        $text=~s/^,|,$//g;
+        $text=~s/,-$/-/g;
         $text = scalar reverse $text;
         $text =~ s/\.00$// if ($remove_decimal_for_ints);
     }
