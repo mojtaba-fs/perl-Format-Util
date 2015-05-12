@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 325;
+use Test::More tests => 328;
 use Test::Exception;
 use Test::NoWarnings;
 
@@ -35,6 +35,10 @@ is(to_monetary_number_format(12345678.9, 1),
     '12,345,678.90', 'One decimal to_monetary_number_format is correct when requested to remove int decimals');
 is(to_monetary_number_format(1234567.89), '1,234,567.89', 'Two decimal to_monetary_number_format is correct');
 is(to_monetary_number_format(123456.789), '123,456.79',   'Three to_monetary_number_format is correct');
+
+is(to_monetary_number_format(-4567.89), '-4,567.89', 'negative number to_monetary_number_format is correct');
+is(to_monetary_number_format(-456.789), '-456.79',   'negative number to_monetary_number_format is correct, no leading ","');
+is(to_monetary_number_format(-56.7), '-56.70',   'negative number to_monetary_number_format is correct, add 2 decimal places');
 
 # Now we just want to make sure that it works with all kinds of inputs, so we'll sort of fuzz test it.
 

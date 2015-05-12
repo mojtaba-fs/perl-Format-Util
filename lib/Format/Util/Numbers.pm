@@ -17,11 +17,11 @@ Format::Util::Numbers - Miscellaneous routines to do with manipulating number fo
 
 =head1 VERSION
 
-Version 0.04
+Version 0.06
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.06';
 
 
 =head1 SYNOPSIS
@@ -133,6 +133,7 @@ sub to_monetary_number_format {
         $text = reverse sprintf "%.2f", $text;
         $text=~s/(\d{3})/$1,/g;
         $text=~s/^,|,$//g;
+        $text=~s/,-$/-/g;
         $text = scalar reverse $text;
         $text =~ s/\.00$// if ($remove_decimal_for_ints);
     }
