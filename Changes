@@ -15,5 +15,5 @@ Revision history for Format-Util
 0.05    24/04/2015
         Documentation fix
 
-0.05    23/09/2016
+0.07    23/09/2016
         Fix bug in method commas().
