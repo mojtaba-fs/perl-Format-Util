@@ -91,6 +91,8 @@ sub commas {
         $x =~ /^(\d*)(\.?\d*)/;
         $x = $1;
         my $last_num = $2;
+        $last_num = 0.0 if $last_num eq "";
+
         my @segments;
         while ($x =~ s/(\d{3})$//) {
             unshift @segments, $1;
