@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 328;
+use Test::More tests => 329;
 use Test::Exception;
 use Test::NoWarnings;
 
@@ -19,6 +19,8 @@ is(commas(12345.6789, 1), '12,345.7',    '1 decimal commas is correct');
 is(commas(12345.6789, 2), '12,345.68',   '2 decimal commas is correct');
 is(commas(12345.6789, 3), '12,345.679',  '3 decimal commas is correct');
 is(commas(12345.6789, 4), '12,345.6789', '4 decimal commas is correct');
+
+is(commas(12345.00, 0), '12,345',      '0 decimal commas is correct');
 
 is(commas('N/A',    4), 'N/A',        'Non-numeric commas returns same');
 is(commas(.0004,    0), '0',          'Virgule does not produce -0');

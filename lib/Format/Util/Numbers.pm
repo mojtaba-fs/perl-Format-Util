@@ -17,12 +17,11 @@ Format::Util::Numbers - Miscellaneous routines to do with manipulating number fo
 
 =head1 VERSION
 
-Version 0.06
+Version 0.07
 
 =cut
 
-our $VERSION = '0.06';
-
+our $VERSION = '0.07';
 
 =head1 SYNOPSIS
 
@@ -44,8 +43,7 @@ Round a number near the precision of the supplied one.
         my $halfhex = unpack('H*', pack('d', 0.5));
         if (substr($halfhex, 0, 2) ne '00' && substr($halfhex, -2) eq '00') {
             substr($halfhex, -4) = '1000';
-        }
-        else {
+        } else {
             substr($halfhex, 0, 4) = '0010';
         }
         unpack('d', pack('H*', $halfhex));
@@ -57,10 +55,11 @@ Round a number near the precision of the supplied one.
         return $input if (not defined $input);
 
         my $rounded = $input;
-        # rounding to 0, doesnt really make sense, but viewing it as a limit process 
+        # rounding to 0, doesnt really make sense, but viewing it as a limit process
         # it means do not round at all
         if ($targ != 0) {
-            $rounded = ($input >= 0)
+            $rounded =
+                ($input >= 0)
                 ? $targ * int(($input + $halfdec * $targ) / $targ)
                 : $targ * ceil(($input - $halfdec * $targ) / $targ);
         }
@@ -90,7 +89,8 @@ sub commas {
         $x = $x * 1;
         $x =~ /^(\d*)(\.?\d*)/;
         $x = $1;
-        my $last_num = $2;
+        my $last_num = $2 || 0;
+
         my @segments;
         while ($x =~ s/(\d{3})$//) {
             unshift @segments, $1;
@@ -131,9 +131,9 @@ sub to_monetary_number_format {
 
     if (looks_like_number($text)) {
         $text = reverse sprintf "%.2f", $text;
-        $text=~s/(\d{3})/$1,/g;
-        $text=~s/^,|,$//g;
-        $text=~s/,-$/-/g;
+        $text =~ s/(\d{3})/$1,/g;
+        $text =~ s/^,|,$//g;
+        $text =~ s/,-$/-/g;
         $text = scalar reverse $text;
         $text =~ s/\.00$// if ($remove_decimal_for_ints);
     }
@@ -228,4 +228,4 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 =cut
 
-1; # End of Format::Util::Numbers
+1;    # End of Format::Util::Numbers

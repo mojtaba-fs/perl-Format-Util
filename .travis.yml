@@ -18,7 +18,6 @@ before_install:
   - "cpanm Test::More"
   - "cpanm Test::Exception"
   - "cpanm Test::NoWarnings"
-  - "cpanm Math::BigInt"
   - "cpanm Scalar::Util"
   - "cpanm POSIX"
   - "cpanm Encode"
