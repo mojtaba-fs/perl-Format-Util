@@ -16,11 +16,11 @@ Format::Util::Strings - Miscellaneous routines to do with manipulating strings
 
 =head1 VERSION
 
-Version 0.01
+Version 0.08
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.08';
 
 
 =head1 SYNOPSIS
