@@ -89,7 +89,7 @@ sub commas {
         $x = $x * 1;
         $x =~ /^(\d*)(\.?\d*)/;
         $x = $1;
-        my $last_num = $2 || 0;
+        my $last_num = $2;
 
         my @segments;
         while ($x =~ s/(\d{3})$//) {
@@ -105,7 +105,7 @@ sub commas {
             $last_num = sprintf $format, $last_num;
             $last_num =~ s/^0//;
         } elsif (defined $decimal_point) {
-            $segments[-1]++ if ($last_num > 0.5);
+            $segments[-1]++ if $last_num && $last_num > 0.5;
             $last_num = '';
         }
         $output = (join ',', @segments) . $last_num;
