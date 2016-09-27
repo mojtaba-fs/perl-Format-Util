@@ -17,3 +17,6 @@ Revision history for Format-Util
 
 0.07    23/09/2016
         Fix bug in method commas().
+
+0.08    26/09/2016
+        Fixes issue where a trailing zero would be added to integers if only a single parameter was passed to commas().
