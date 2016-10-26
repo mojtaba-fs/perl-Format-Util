@@ -15,15 +15,16 @@ before_install:
   - source ~/travis-perl-helpers/init
   - build-perl
   - perl -V
-  - "cpanm Devel::Cover::Report::Coveralls"
-  - "cpanm Tie::Hash::LRU"
-  - "cpanm Test::More"
-  - "cpanm Test::Exception"
-  - "cpanm Test::NoWarnings"
-  - "cpanm Scalar::Util"
-  - "cpanm POSIX"
-  - "cpanm Encode"
+  - "cpanm -qn Test::Requires::Git"
+  - "cpanm -qn Devel::Cover::Report::Codecov"
+  - "cpanm -qn Tie::Hash::LRU"
+  - "cpanm -qn Test::More"
+  - "cpanm -qn Test::Exception"
+  - "cpanm -qn Test::NoWarnings"
+  - "cpanm -qn Scalar::Util"
+  - "cpanm -qn POSIX"
+  - "cpanm -qn Encode"
   - "perl Makefile.PL"
   - "make"
 script:
-  make test && cover -test -report coveralls
+  make test && cover -test -report codecov

@@ -1,7 +1,7 @@
 **Format::Util** - Miscellaneous routines to do with manipulating on Numbers and Strings
 
 [![Build Status](https://travis-ci.org/binary-com/perl-Format-Util.svg?branch=master)](https://travis-ci.org/binary-com/perl-Format-Util)
-[![Coverage Status](https://coveralls.io/repos/binary-com/perl-Format-Util.png?branch=master)](https://coveralls.io/r/binary-com/perl-Format-Util?branch=master)
+[![codecov](https://codecov.io/gh/binary-com/perl-Format-Util/branch/master/graph/badge.svg)](https://codecov.io/gh/binary-com/perl-Format-Util)
 [![Gitter chat](https://badges.gitter.im/binary-com/perl-Format-Util.png)](https://gitter.im/binary-com/perl-Format-Util)
 
 
