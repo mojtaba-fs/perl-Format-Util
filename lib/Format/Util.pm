@@ -8,10 +8,6 @@ use warnings FATAL => 'all';
 
 Format::Util - Miscellaneous routines to do with manipulating with strings and numbers!
 
-=head1 VERSION
-
-Version 0.08
-
 =cut
 
 our $VERSION = '0.08';
