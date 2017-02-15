@@ -58,7 +58,7 @@ sub defang {
 
     Removes potentially dangerous characters from input strings.
     You should probably be using Untaint.
-    
+
     defang_lite is a lighter version that is not so restrictive as defang
 
 =cut
