@@ -15,13 +15,9 @@ use POSIX qw(ceil);
 
 Format::Util::Numbers - Miscellaneous routines to do with manipulating number format!
 
-=head1 VERSION
-
-Version 0.08
-
 =cut
 
-our $VERSION = '0.08';
+## VERSION
 
 =head1 SYNOPSIS
 

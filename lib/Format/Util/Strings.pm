@@ -14,13 +14,9 @@ our @EXPORT_OK = qw( defang defang_lite set_selected_item );
 
 Format::Util::Strings - Miscellaneous routines to do with manipulating strings
 
-=head1 VERSION
-
-Version 0.08
-
 =cut
 
-our $VERSION = '0.08';
+## VERSION
 
 
 =head1 SYNOPSIS
@@ -62,7 +58,7 @@ sub defang {
 
     Removes potentially dangerous characters from input strings.
     You should probably be using Untaint.
-    
+
     defang_lite is a lighter version that is not so restrictive as defang
 
 =cut

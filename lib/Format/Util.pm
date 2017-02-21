@@ -8,14 +8,9 @@ use warnings FATAL => 'all';
 
 Format::Util - Miscellaneous routines to do with manipulating with strings and numbers!
 
-=head1 VERSION
-
-Version 0.08
-
 =cut
 
-our $VERSION = '0.08';
-
+our $VERSION = '0.09';
 
 =head1 SYNOPSIS
 
@@ -116,4 +111,4 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 =cut
 
-1; # End of Format::Util
+1;    # End of Format::Util
