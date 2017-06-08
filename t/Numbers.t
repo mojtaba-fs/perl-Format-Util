@@ -1,11 +1,11 @@
 use strict;
 use warnings;
 
-use Test::More tests => 333;
+use Test::More tests => 377;
 use Test::Exception;
 use Test::NoWarnings;
 
-use Format::Util::Numbers qw(roundnear commas to_monetary_number_format);
+use Format::Util::Numbers qw(roundnear commas to_monetary_number_format formatnumber financialrounding);
 
 is(roundnear(0,    345.56789), 345.56789, 'No rounding is correct.');
 is(roundnear(1,    345.56789), 346,       'Ones is correct.');
@@ -46,8 +46,59 @@ is(to_monetary_number_format(-4567.89), '-4,567.89', 'negative number to_monetar
 is(to_monetary_number_format(-456.789), '-456.79',   'negative number to_monetary_number_format is correct, no leading ","');
 is(to_monetary_number_format(-56.7),    '-56.70',    'negative number to_monetary_number_format is correct, add 2 decimal places');
 
-# Now we just want to make sure that it works with all kinds of inputs, so we'll sort of fuzz test it.
+is formatnumber('amount', 'USD'), undef, 'undef number comes back same, no formatting done';
+is formatnumber('amount',  'USD', 'abc'), 'abc', 'invalid number comes back same, no formatting done';
+is formatnumber('amount',  'USD', '+.'),  '+.',  'invalid number comes back same, no formatting done';
+is formatnumber('invalid', 'USD', 10),    '10',  'invalid precision type sends back the same value';
+is formatnumber('amount',  'FOO', 10),    '10',  'invalid currency type sends back the same value';
 
+is formatnumber('amount', 'USD', 10.345),  '10.35',  'Changed the input number';
+is formatnumber('amount', 'USD', -10.345), '-10.35', 'Changed the input number';
+is formatnumber('amount', 'USD', 10.344),  '10.34',  'trimmed the input number';
+is formatnumber('amount', 'EUR', 10.394),  '10.39',  'trimmed the input number';
+is formatnumber('amount', 'JPY', 10.398),  '10.40',  'Changed the input number';
+is formatnumber('amount', 'AUD', -10.398), '-10.40', 'Changed the input number';
+
+is formatnumber('amount', 'USD', 10),               '10.00',       'USD 10 -> 10.00';
+is formatnumber('amount', 'USD', 10.000001),        '10.00',       'USD 10.000001 -> 10.00';
+is formatnumber('amount', 'EUR', 10.000001),        '10.00',       'EUR 10.000001 -> 10.00';
+is formatnumber('amount', 'JPY', 10.000001),        '10.00',       'JPY 10.000001 -> 10.00';
+is formatnumber('amount', 'BTC', 10),               '10.00000000', 'BTC 10 -> 10.00000000';
+is formatnumber('amount', 'BTC', 10.000001),        '10.00000100', 'BTC 10.000001 -> 10.00000100';
+is formatnumber('amount', 'BTC', 10.0000000000001), '10.00000000', 'BTC 10.0000000000001 -> 10.00000000';
+is formatnumber('amount', 'ETH', 10),               '10.00000000', 'ETH 10 -> 10.00000000';
+is formatnumber('amount', 'ETH', 10.000001),        '10.00000100', 'ETH 10.000001 -> 10.00000100';
+is formatnumber('amount', 'ETH', 10.0000000000001), '10.00000000', 'ETH 10.0000000000001 -> 10.00000000';
+
+is financialrounding('amount', 'USD'), undef, 'undef number comes back same, no formatting done';
+is financialrounding('amount', 'USD', 'abc'), 'abc', 'invalid number comes back same, no formatting done';
+is financialrounding('amount', 'USD', '+.'),  '+.',  'invalid number comes back same, no formatting done';
+cmp_ok financialrounding('invalid', 'USD', 10), '==', 10, 'invalid precision type sends back the same value';
+cmp_ok financialrounding('amount',  'FOO', 10), '==', 10, 'invalid currency type sends back the same value';
+
+cmp_ok financialrounding('amount', 'USD', 10.345),  '==', 10.35,  'Changed the input number';
+cmp_ok financialrounding('amount', 'USD', 10.344),  '==', 10.34,  'Changed the input number';
+cmp_ok financialrounding('amount', 'USD', 10.394),  '==', 10.39,  'trimmed the input number';
+cmp_ok financialrounding('amount', 'USD', -10.394), '==', -10.39, 'trimmed the input number';
+cmp_ok financialrounding('amount', 'USD', 10.398),  '==', 10.40,  'Changed the input number';
+cmp_ok financialrounding('amount', 'USD', -10.398), '==', -10.40, 'Changed the input number';
+
+cmp_ok financialrounding('amount', 'USD', 10),               '==', 10,        'USD 10 -> 10.00';
+cmp_ok financialrounding('amount', 'USD', 10.000001),        '==', 10,        'USD 10.000001 -> 10.00';
+cmp_ok financialrounding('amount', 'EUR', 10.000001),        '==', 10,        'EUR 10.000001 -> 10.00';
+cmp_ok financialrounding('amount', 'JPY', 10.000001),        '==', 10,        'JPY 10.000001 -> 10.00';
+cmp_ok financialrounding('amount', 'BTC', 10),               '==', 10,        'BTC 10 -> 10.00000000';
+cmp_ok financialrounding('amount', 'BTC', 10.000001),        '==', 10.000001, 'BTC 10.000001 -> 10.00000100';
+cmp_ok financialrounding('amount', 'BTC', 10.0000000000001), '==', 10,        'BTC 10.0000000000001 -> 10.00000000';
+cmp_ok financialrounding('amount', 'BTC', 0.0000000650001),  '==', 0.00000007,
+    'BTC 0.000000065 -> 0.00000007 changed the number to higher value, need to be careful with this';
+cmp_ok financialrounding('amount', 'ETH', 10),               '==', 10,        'ETH 10 -> 10.00000000';
+cmp_ok financialrounding('amount', 'ETH', 10.000001),        '==', 10.000001, 'ETH 10.000001 -> 10.00000100';
+cmp_ok financialrounding('amount', 'ETH', 10.0000000000001), '==', 10,        'ETH 10.0000000000001 -> 10.00000000';
+cmp_ok financialrounding('amount', 'ETH', 0.0000000650001),  '==', 0.00000007,
+    'ETH 0.000000065 -> 0.00000007 changed the number to higher value, need to be careful with this';
+
+# Now we just want to make sure that it works with all kinds of inputs, so we'll sort of fuzz test it.
 foreach my $i (1 .. 100) {
     my $j = rand() * rand(100000);
     ok(roundnear(1 / $i, $j), 'roundnear runs for (' . 1 / $i . ',' . $j . ')');

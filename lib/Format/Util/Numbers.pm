@@ -67,7 +67,7 @@ Round a number near the precision of the supplied one.
     }
 }
 
-my $precisions = YAML::XS::LoadFile(File::ShareDir::dist_file('Price-Calculator', 'precision.yml'));
+my $precisions = YAML::XS::LoadFile(File::ShareDir::dist_file('Format-Util', 'precision.yml'));
 my $floating_point_regex = qr/^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$/;
 
 =head2 commas
