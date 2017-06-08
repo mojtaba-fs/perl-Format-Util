@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 377;
+use Test::More tests => 477;
 use Test::Exception;
 use Test::NoWarnings;
 
@@ -101,7 +101,12 @@ cmp_ok financialrounding('amount', 'ETH', 0.0000000650001),  '==', 0.00000007,
 # Now we just want to make sure that it works with all kinds of inputs, so we'll sort of fuzz test it.
 foreach my $i (1 .. 100) {
     my $j = rand() * rand(100000);
-    ok(roundnear(1 / $i, $j), 'roundnear runs for (' . 1 / $i . ',' . $j . ')');
+    cmp_ok(roundnear(1 / $i, $j), '>=', 0, 'roundnear runs for (' . 1 / $i . ',' . $j . ')');
     ok(commas($j, $i), 'commas runs for (' . $j . ',' . $i . ')');
     ok(to_monetary_number_format($j), 'to_monetary_number_format runs for (' . $j . ')');
+}
+
+foreach my $i (-100 .. -1) {
+    my $j = rand() * rand(-100000);
+    cmp_ok(roundnear(1 / $i, $j), '<=', 0, 'roundnear runs for (' . 1 / $i . ',' . $j . ')');
 }
