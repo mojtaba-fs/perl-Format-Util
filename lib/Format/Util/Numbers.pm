@@ -29,10 +29,6 @@ Format::Util::Numbers - Miscellaneous routines to do with manipulating number fo
 
 =head1 EXPORT
 
-my $precisions = YAML::XS::LoadFile(File::ShareDir::dist_file('Price-Calculator', 'precision.yml'));
-my $floating_point_regex = qr/^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$/;
-
-
 =head2 roundnear
 
 Round a number near the precision of the supplied one.
@@ -70,6 +66,9 @@ Round a number near the precision of the supplied one.
         return 1 * $rounded;
     }
 }
+
+my $precisions = YAML::XS::LoadFile(File::ShareDir::dist_file('Price-Calculator', 'precision.yml'));
+my $floating_point_regex = qr/^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$/;
 
 =head2 commas
 
@@ -168,9 +167,16 @@ currency
 sub formatnumber {
     my ($type, $currency, $val) = @_;
 
-    die 'Invalid number.'      if (not defined $val      or $val !~ $floating_point_regex);
-    die 'Invalid format type.' if (not defined $type     or not exists $precisions->{$type});
-    die 'Invalid currency.'    if (not defined $currency or not exists $precisions->{$type}->{$currency});
+    # return val if any one of value, currency or type is invalid
+    return $val
+        if ((
+            not defined $val
+            or $val !~ $floating_point_regex
+        )
+        or (   not defined $type
+            or not exists $precisions->{$type})
+        or (   not defined $currency
+            or not exists $precisions->{$type}->{$currency}));
 
     return sprintf('%0.0' . $precisions->{$type}->{$currency} . 'f', $val);
 }
@@ -198,9 +204,16 @@ currency
 sub financialrounding {
     my ($type, $currency, $val) = @_;
 
-    die 'Invalid number.'      if (not defined $val      or $val !~ $floating_point_regex);
-    die 'Invalid format type.' if (not defined $type     or not exists $precisions->{$type});
-    die 'Invalid currency.'    if (not defined $currency or not exists $precisions->{$type}->{$currency});
+    # return val if any one of value, currency or type is invalid
+    return $val
+        if ((
+            not defined $val
+            or $val !~ $floating_point_regex
+        )
+        or (   not defined $type
+            or not exists $precisions->{$type})
+        or (   not defined $currency
+            or not exists $precisions->{$type}->{$currency}));
 
     # get current global mode
     my $current_mode = Math::BigFloat->round_mode();
