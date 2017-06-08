@@ -5,11 +5,14 @@ use strict;
 use warnings FATAL => 'all';
 
 use base 'Exporter';
-our @EXPORT_OK = qw( commas to_monetary_number_format roundnear );
+our @EXPORT_OK = qw/commas to_monetary_number_format roundnear financialrounding formatnumber/;
 
 use Carp qw(cluck);
 use Scalar::Util qw(looks_like_number);
 use POSIX qw(ceil);
+use YAML::XS;
+use File::ShareDir;
+use Math::BigFloat lib => 'Calc';
 
 =head1 NAME
 
@@ -25,6 +28,10 @@ Format::Util::Numbers - Miscellaneous routines to do with manipulating number fo
     ...
 
 =head1 EXPORT
+
+my $precisions = YAML::XS::LoadFile(File::ShareDir::dist_file('Price-Calculator', 'precision.yml'));
+my $floating_point_regex = qr/^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$/;
+
 
 =head2 roundnear
 
@@ -137,6 +144,77 @@ sub to_monetary_number_format {
     return $text;
 }
 
+=head2 formatnumber
+
+This sub is used to format number as per precision defined
+per currency.
+
+Use this sub only for formatting not for rounding, i.e
+use this in modules which are used for display purpose
+only i.e client facing.
+
+DON'T USE THIS FOR CALCULATION, COMPARISON OF NUMBERS
+DON'T USE THIS FOR QUANTITATIVE ANALYSIS
+
+This sub accepts type i.e whether its price or amount
+- price e.g. ask price, bid price
+- amount e.g. balance, deposit/withdraw amount
+
+and takes currency to calculate precision defined per
+currency
+
+=cut
+
+sub formatnumber {
+    my ($type, $currency, $val) = @_;
+
+    die 'Invalid number.'      if (not defined $val      or $val !~ $floating_point_regex);
+    die 'Invalid format type.' if (not defined $type     or not exists $precisions->{$type});
+    die 'Invalid currency.'    if (not defined $currency or not exists $precisions->{$type}->{$currency});
+
+    return sprintf('%0.0' . $precisions->{$type}->{$currency} . 'f', $val);
+}
+
+=head2 financialrounding
+
+This sub is used to round number as per precision defined
+per currency.
+
+Use this sub only for rounding numbers thats are related
+to currency like price, amount, balance etc
+
+USE THIS WHEN YOU WANT TO COMPARE NUMBERS RELATED TO CURRENCY
+USE THIS FOR QUANTITATIVE ANALYSIS FOR NUMBER RELATED TO CURRENCY
+
+This sub accepts type i.e whether its price or amount
+- price e.g. ask price, bid price
+- amount e.g. balance, deposit/withdraw amount
+
+and takes currency to calculate precision defined per
+currency
+
+=cut
+
+sub financialrounding {
+    my ($type, $currency, $val) = @_;
+
+    die 'Invalid number.'      if (not defined $val      or $val !~ $floating_point_regex);
+    die 'Invalid format type.' if (not defined $type     or not exists $precisions->{$type});
+    die 'Invalid currency.'    if (not defined $currency or not exists $precisions->{$type}->{$currency});
+
+    # get current global mode
+    my $current_mode = Math::BigFloat->round_mode();
+    Math::BigFloat->round_mode('common');
+
+    my $x = Math::BigFloat->new($val)->bfround('-' . $precisions->{$type}->{$currency});
+    $x = $x->numify();
+
+    # set back to origianl mode
+    Math::BigFloat->round_mode($current_mode);
+
+    return $x;
+}
+
 =head1 AUTHOR
 
 binary.com, C<< <rakesh at binary.com> >>
@@ -147,13 +225,11 @@ Please report any bugs or feature requests to C<bug-format-util at rt.cpan.org>,
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Format-Util>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
-
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
 
     perldoc Format::Util::Numbers
-
 
 You can also look for information at:
 
@@ -220,7 +296,6 @@ YOUR LOCAL LAW. UNLESS REQUIRED BY LAW, NO COPYRIGHT HOLDER OR
 CONTRIBUTOR WILL BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, OR
 CONSEQUENTIAL DAMAGES ARISING IN ANY WAY OUT OF THE USE OF THE PACKAGE,
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 
 =cut
 
