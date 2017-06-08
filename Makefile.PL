@@ -27,7 +27,9 @@ my %WriteMakefileArgs = (
     "Math::BigInt" => 0,
     "POSIX" => 0,
     "Scalar::Util" => 0
+    "YAML::XS" => 0,
     "File::ShareDir" => 0,
+    "Math::BigFloat" => 0,
   },
   "TEST_REQUIRES" => {
     "ExtUtils::MakeMaker" => 0,

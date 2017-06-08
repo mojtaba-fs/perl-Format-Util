@@ -20,10 +20,10 @@ is(commas(12345.6789, 2), '12,345.68',   '2 decimal commas is correct');
 is(commas(12345.6789, 3), '12,345.679',  '3 decimal commas is correct');
 is(commas(12345.6789, 4), '12,345.6789', '4 decimal commas is correct');
 
-is(commas(12345.00, 0),   '12,345',       '0 decimal commas is correct');
-is(commas(12345, 0),      '12,345',       '0 decimal commas is correct');
-is(commas(1234567, 0),    '1,234,567',    'integer value >1m is correct');
-is(commas(1234567),       '1,234,567',    'integer value >1m with no DP parameter is correct');
+is(commas(12345.00, 0), '12,345',    '0 decimal commas is correct');
+is(commas(12345,    0), '12,345',    '0 decimal commas is correct');
+is(commas(1234567,  0), '1,234,567', 'integer value >1m is correct');
+is(commas(1234567), '1,234,567', 'integer value >1m with no DP parameter is correct');
 is(commas(1234567.89, 2), '1,234,567.89', 'floating point value >1m is correct');
 
 is(commas('N/A',    4), 'N/A',        'Non-numeric commas returns same');
@@ -44,7 +44,7 @@ is(to_monetary_number_format(123456.789), '123,456.79',   'Three to_monetary_num
 
 is(to_monetary_number_format(-4567.89), '-4,567.89', 'negative number to_monetary_number_format is correct');
 is(to_monetary_number_format(-456.789), '-456.79',   'negative number to_monetary_number_format is correct, no leading ","');
-is(to_monetary_number_format(-56.7), '-56.70',   'negative number to_monetary_number_format is correct, add 2 decimal places');
+is(to_monetary_number_format(-56.7),    '-56.70',    'negative number to_monetary_number_format is correct, add 2 decimal places');
 
 # Now we just want to make sure that it works with all kinds of inputs, so we'll sort of fuzz test it.
 
