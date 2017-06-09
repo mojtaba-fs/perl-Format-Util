@@ -229,7 +229,7 @@ sub financialrounding {
             or $val !~ $floating_point_regex
         )
         or not defined $precisions->{$type // 'unknown-type'}
-        or not defined $precision->{$type}->{$currency // 'unknown-type'});
+        or not defined $precisions->{$type}->{$currency // 'unknown-type'});
 
     # get current global mode
     my $current_mode = Math::BigFloat->round_mode();
