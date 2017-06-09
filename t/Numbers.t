@@ -121,8 +121,8 @@ is $precisions->{amount}->{AUD}, '2', 'Correct amount precision for AUD';
 is $precisions->{amount}->{JPY}, '2', 'Correct amount precision for JPY';
 is $precisions->{amount}->{BTC}, '8', 'Correct amount precision for BTC';
 is $precisions->{amount}->{LTC}, '8', 'Correct amount precision for LTC';
-is $precisions->{amount}->{ETH}, '2', 'Correct amount precision for ETH';
-is $precisions->{amount}->{ETC}, '2', 'Correct amount precision for ETC';
+is $precisions->{amount}->{ETH}, '8', 'Correct amount precision for ETH';
+is $precisions->{amount}->{ETC}, '8', 'Correct amount precision for ETC';
 
 is $precisions->{price}->{USD}, '2', 'Correct price precision for USD';
 is $precisions->{price}->{EUR}, '2', 'Correct price precision for EUR';
@@ -131,7 +131,7 @@ is $precisions->{price}->{AUD}, '2', 'Correct price precision for AUD';
 is $precisions->{price}->{JPY}, '0', 'Correct price precision for JPY';
 is $precisions->{price}->{BTC}, '8', 'Correct price precision for BTC';
 is $precisions->{price}->{LTC}, '8', 'Correct price precision for LTC';
-is $precisions->{price}->{ETH}, '2', 'Correct price precision for ETH';
-is $precisions->{price}->{ETC}, '2', 'Correct price precision for ETC';
+is $precisions->{price}->{ETH}, '8', 'Correct price precision for ETH';
+is $precisions->{price}->{ETC}, '8', 'Correct price precision for ETC';
 
 done_testing();
