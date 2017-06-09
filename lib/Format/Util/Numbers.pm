@@ -25,15 +25,7 @@ Format::Util::Numbers - Miscellaneous routines to do with manipulating number fo
 =head1 SYNOPSIS
 
     use Format::Util::Numbers qw( commas to_monetary_number_format roundnear formatnumber financialrounding);
-
-    roundnear( 0.01, 12345.678) => 12345.68
-    commas(12345.679, 1) => 12,345.7
-    to_monetary_number_format(123456789) => 123,456,789.00
-
-    # this two subs takes precision defined per currency in config file passed by
-    # $ENV{FORMAT_UTIL_PRECISION}, else it defaults to precision.yml
-    formatnumber('price', 'USD', 10) => 10.00
-    financialrounding('amount', 'USD', 10.345) => 10.35
+    ...
 
 =head1 EXPORT
 
@@ -174,6 +166,9 @@ This sub accepts type i.e whether its price or amount
 and takes currency to calculate precision defined per
 currency.
 
+this subs takes precision defined per currency in config file passed by
+ENV{FORMAT_UTIL_PRECISION}, else it defaults to precision.yml
+
 Returns string
 
     formatnumber('price', 'USD', 10) => 10.00
@@ -212,6 +207,9 @@ This sub accepts type i.e whether its price or amount
 
 and takes currency to calculate precision defined per
 currency.
+
+this subs takes precision defined per currency in config file passed by
+ENV{FORMAT_UTIL_PRECISION}, else it defaults to precision.yml
 
 Returns number
 
