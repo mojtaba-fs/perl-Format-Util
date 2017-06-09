@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More;
+use Test::More tests => 495;
 use Test::Exception;
 use Test::NoWarnings;
 
@@ -133,5 +133,3 @@ is $precisions->{price}->{BTC}, '8', 'Correct price precision for BTC';
 is $precisions->{price}->{LTC}, '8', 'Correct price precision for LTC';
 is $precisions->{price}->{ETH}, '8', 'Correct price precision for ETH';
 is $precisions->{price}->{ETC}, '8', 'Correct price precision for ETC';
-
-done_testing();
