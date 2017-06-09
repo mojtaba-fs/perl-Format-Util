@@ -18,7 +18,6 @@ Format::Util::Strings - Miscellaneous routines to do with manipulating strings
 
 ## VERSION
 
-
 =head1 SYNOPSIS
 
 Quick summary of what the module does.
@@ -68,7 +67,7 @@ sub defang_lite {
 
     return '' if not defined $string;
     return '' if length $string < 0;
- 
+
     $string = Encode::decode('UTF-8', $string) unless Encode::is_utf8($string);
 
     if (length($string) > 500) { $string = substr($string, 0, 500); }
@@ -201,4 +200,4 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 =cut
 
-1; # End of Format::Util::Strings
+1;    # End of Format::Util::Strings

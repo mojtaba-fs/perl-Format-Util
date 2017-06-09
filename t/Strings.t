@@ -52,9 +52,9 @@ subtest 'set_selected_item' => sub {
     is($options->{input}->{options}->[0]->{selected},        'selected', '...and it did');
     is(exists $options->{input}->{options}->[1]->{selected}, '',         '...without changing other stuff.');
     my $html_string =
-      '<select name="us" id="b_u"> <option value="WOW">WOW</option><option value="WOW2">WOW2</option><option selected="selected" disabled="disabled" value="WOW3" class="disabled">WOW3</option><option value="WOW4">WOW4</option> </select>';
+        '<select name="us" id="b_u"> <option value="WOW">WOW</option><option value="WOW2">WOW2</option><option selected="selected" disabled="disabled" value="WOW3" class="disabled">WOW3</option><option value="WOW4">WOW4</option> </select>';
     my $selected_html =
-      '<select name="us" id="b_u"> <option value="WOW">WOW</option><option value="WOW2">WOW2</option><option selected="selected" disabled="disabled" value="WOW3" class="disabled">WOW3</option><option value="WOW4">WOW4</option> </select>';
+        '<select name="us" id="b_u"> <option value="WOW">WOW</option><option value="WOW2">WOW2</option><option selected="selected" disabled="disabled" value="WOW3" class="disabled">WOW3</option><option value="WOW4">WOW4</option> </select>';
 
     is(set_selected_item('WOW3', $html_string), $selected_html, 'Plus it "works" on strings!');
 };
