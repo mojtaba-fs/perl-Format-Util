@@ -30,8 +30,8 @@ Format::Util::Numbers - Miscellaneous routines to do with manipulating number fo
     commas(12345.679, 1) => 12,345.7
     to_monetary_number_format(123456789) => 123,456,789.00
 
-    # this two subs takes precision config file passed by $ENV{FORMAT_UTIL_PRECISION} or defaults to
-    # precision.yml
+    # this two subs takes precision defined per currency in config file passed by
+    # $ENV{FORMAT_UTIL_PRECISION}, else it defaults to precision.yml
     formatnumber('price', 'USD', 10) => 10.00
     financialrounding('amount', 'USD', 10.345) => 10.35
 
@@ -42,6 +42,7 @@ Format::Util::Numbers - Miscellaneous routines to do with manipulating number fo
 Round a number near the precision of the supplied one.
 
     roundnear( 0.01, 12345.678) => 12345.68
+
 =cut
 
 {
@@ -281,9 +282,7 @@ L<http://search.cpan.org/dist/Format-Util/>
 
 =back
 
-
 =head1 ACKNOWLEDGEMENTS
-
 
 =head1 LICENSE AND COPYRIGHT
 
