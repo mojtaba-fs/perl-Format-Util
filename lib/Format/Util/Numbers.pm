@@ -190,7 +190,7 @@ sub formatnumber {
             or $val !~ $floating_point_regex
         )
         or not defined $precisions->{$type // 'unknown-type'}
-        or not defined $precisions->{$type // 'unknown-type'});
+        or not defined $precisions->{$type}->{$currency // 'unknown-type'});
 
     return sprintf('%0.0' . $precisions->{$type}->{$currency} . 'f', $val);
 }
