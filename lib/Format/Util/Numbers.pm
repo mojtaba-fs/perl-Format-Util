@@ -24,8 +24,16 @@ Format::Util::Numbers - Miscellaneous routines to do with manipulating number fo
 
 =head1 SYNOPSIS
 
-    use Format::Util::Numbers qw( commas to_monetary_number_format roundnear );
-    ...
+    use Format::Util::Numbers qw( commas to_monetary_number_format roundnear formatnumber financialrounding);
+
+    roundnear( 0.01, 12345.678) => 12345.68
+    commas(12345.679, 1) => 12,345.7
+    to_monetary_number_format(123456789) => 123,456,789.00
+
+    # this two subs takes precision config file passed by $ENV{FORMAT_UTIL_PRECISION} or defaults to
+    # precision.yml
+    formatnumber('price', 'USD', 10) => 10.00
+    financialrounding('amount', 'USD', 10.345) => 10.35
 
 =head1 EXPORT
 
@@ -67,7 +75,10 @@ Round a number near the precision of the supplied one.
     }
 }
 
-my $precisions = YAML::XS::LoadFile(File::ShareDir::dist_file('Format-Util', 'precision.yml'));
+# format of precsion should be
+# TYPE:
+#   CURRENCY: PRECISION
+my $precisions = YAML::XS::LoadFile($ENV{FORMAT_UTIL_PRECISION} // File::ShareDir::dist_file('Format-Util', 'precision.yml'));
 my $floating_point_regex = qr/^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$/;
 
 =head2 commas
@@ -160,7 +171,11 @@ This sub accepts type i.e whether its price or amount
 - amount e.g. balance, deposit/withdraw amount
 
 and takes currency to calculate precision defined per
-currency
+currency.
+
+Returns string
+
+    formatnumber('price', 'USD', 10) => 10.00
 
 =cut
 
@@ -173,10 +188,8 @@ sub formatnumber {
             not defined $val
             or $val !~ $floating_point_regex
         )
-        or (   not defined $type
-            or not exists $precisions->{$type})
-        or (   not defined $currency
-            or not exists $precisions->{$type}->{$currency}));
+        or not defined $precisions->{$type // 'unknown-type'}
+        or not defined $precisions->{$type // 'unknown-type'});
 
     return sprintf('%0.0' . $precisions->{$type}->{$currency} . 'f', $val);
 }
@@ -197,7 +210,11 @@ This sub accepts type i.e whether its price or amount
 - amount e.g. balance, deposit/withdraw amount
 
 and takes currency to calculate precision defined per
-currency
+currency.
+
+Returns number
+
+    financialrounding('amount', 'USD', 10.345) => 10.35
 
 =cut
 
@@ -210,10 +227,8 @@ sub financialrounding {
             not defined $val
             or $val !~ $floating_point_regex
         )
-        or (   not defined $type
-            or not exists $precisions->{$type})
-        or (   not defined $currency
-            or not exists $precisions->{$type}->{$currency}));
+        or not defined $precisions->{$type // 'unknown-type'}
+        or not defined $precision->{$type}->{$currency // 'unknown-type'});
 
     # get current global mode
     my $current_mode = Math::BigFloat->round_mode();
