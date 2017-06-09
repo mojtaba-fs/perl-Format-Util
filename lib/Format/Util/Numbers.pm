@@ -242,6 +242,16 @@ sub financialrounding {
     return $x;
 }
 
+=head2 get_precision_config
+
+This is used get complete currency precision config.
+
+=cut
+
+sub get_precision_config {
+    return $precisions;
+}
+
 =head1 AUTHOR
 
 binary.com, C<< <rakesh at binary.com> >>

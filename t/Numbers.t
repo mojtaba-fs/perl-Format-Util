@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 477;
+use Test::More tests => 495;
 use Test::Exception;
 use Test::NoWarnings;
 
@@ -110,3 +110,26 @@ foreach my $i (-100 .. -1) {
     my $j = rand() * rand(-100000);
     cmp_ok(roundnear(1 / $i, $j), '<=', 0, 'roundnear runs for (' . 1 / $i . ',' . $j . ')');
 }
+
+# Test default precisions
+my $precisions = Format::Util::Numbers::get_precision_config();
+
+is $precisions->{amount}->{USD}, '2', 'Correct amount precision for USD';
+is $precisions->{amount}->{EUR}, '2', 'Correct amount precision for EUR';
+is $precisions->{amount}->{GBP}, '2', 'Correct amount precision for GBP';
+is $precisions->{amount}->{AUD}, '2', 'Correct amount precision for AUD';
+is $precisions->{amount}->{JPY}, '2', 'Correct amount precision for JPY';
+is $precisions->{amount}->{BTC}, '8', 'Correct amount precision for BTC';
+is $precisions->{amount}->{LTC}, '8', 'Correct amount precision for LTC';
+is $precisions->{amount}->{ETH}, '8', 'Correct amount precision for ETH';
+is $precisions->{amount}->{ETC}, '8', 'Correct amount precision for ETC';
+
+is $precisions->{price}->{USD}, '2', 'Correct price precision for USD';
+is $precisions->{price}->{EUR}, '2', 'Correct price precision for EUR';
+is $precisions->{price}->{GBP}, '2', 'Correct price precision for GBP';
+is $precisions->{price}->{AUD}, '2', 'Correct price precision for AUD';
+is $precisions->{price}->{JPY}, '0', 'Correct price precision for JPY';
+is $precisions->{price}->{BTC}, '8', 'Correct price precision for BTC';
+is $precisions->{price}->{LTC}, '8', 'Correct price precision for LTC';
+is $precisions->{price}->{ETH}, '8', 'Correct price precision for ETH';
+is $precisions->{price}->{ETC}, '8', 'Correct price precision for ETC';
