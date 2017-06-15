@@ -271,7 +271,7 @@ sub roundcommon {
             not defined $val
             or $val !~ $floating_point_regex
         )
-        or (not defined $precision or $precision !~ /i^(?:1(?:[eE][-]?[0-9]+)?|0(?:\.0*1)?)$/ or $precision == 0));
+        or (not defined $precision or $precision !~ /^(?:1(?:[eE][-]?[0-9]+)?|0(?:\.0*1)?)$/ or $precision == 0));
 
     # get the number of decimal places needed by BigFloat
     $precision = log(1 / $precision) / log(10);
