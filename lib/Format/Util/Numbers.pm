@@ -5,7 +5,7 @@ use strict;
 use warnings FATAL => 'all';
 
 use base 'Exporter';
-our @EXPORT_OK = qw/commas to_monetary_number_format roundnear roundcommon financialrounding formatnumber/;
+our @EXPORT_OK = qw/commas to_monetary_number_format roundnear roundcommon financialrounding formatnumber get_min_unit/;
 
 use Carp qw(cluck);
 use Scalar::Util qw(looks_like_number);
@@ -287,6 +287,29 @@ This is used get complete currency precision config.
 
 sub get_precision_config {
     return $precisions;
+}
+
+=head2 get_min_unit
+
+Given a currency, this subroutine obtains the smallest possible unit of a currency using the currency's pip size.
+
+For example, if the currency requested is USD, this function will return 0.01.
+
+Everything returned in this function is considered a price.
+
+=cut
+
+sub get_min_unit {
+
+    my ($currency) = shift;
+
+    # Special case for JPY
+    return 1 if $currency eq 'JPY';
+
+    die "Currency $currency and/or its precision is not defined."
+        if ((not defined $currency)
+        or not defined $precisions->{price}->{$currency // 'unknown-type'});
+    return formatnumber('price', $currency, 1 / 10**($precisions->{price}->{$currency}));
 }
 
 # common sub used by roundcommon and financialrounding
