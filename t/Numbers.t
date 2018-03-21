@@ -111,6 +111,7 @@ subtest 'financialrounding' => sub {
     cmp_ok financialrounding('amount', 'USD', 10.000001),        '==', 10,        'USD 10.000001 -> 10.00';
     cmp_ok financialrounding('amount', 'EUR', 10.000001),        '==', 10,        'EUR 10.000001 -> 10.00';
     cmp_ok financialrounding('amount', 'JPY', 10.000001),        '==', 10,        'JPY 10.000001 -> 10.00';
+    cmp_ok financialrounding('amount', 'AUD', 10.000001),        '==', 10,        'AUD 10.000001 -> 10.00';
     cmp_ok financialrounding('amount', 'BTC', 10),               '==', 10,        'BTC 10 -> 10.00000000';
     cmp_ok financialrounding('amount', 'BTC', 10.000001),        '==', 10.000001, 'BTC 10.000001 -> 10.00000100';
     cmp_ok financialrounding('amount', 'BTC', 10.0000000000001), '==', 10,        'BTC 10.0000000000001 -> 10.00000000';
