@@ -303,12 +303,13 @@ sub get_min_unit {
 
     my ($currency) = shift;
 
-    # Special case for JPY
-    return 1 if $currency eq 'JPY';
-
     die "Currency $currency and/or its precision is not defined."
         if ((not defined $currency)
         or not defined $precisions->{price}->{$currency // 'unknown-type'});
+
+    # For cases where the precision is 0, we return 1 as the smallest denomination
+    return 1 if $precisions->{price}->{$currency} == 0;
+
     return formatnumber('price', $currency, 1 / 10**($precisions->{price}->{$currency}));
 }
 
