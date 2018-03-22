@@ -301,7 +301,7 @@ Everything returned in this function is considered a price.
 
 sub get_min_unit {
 
-    my ($currency) = shift;
+    my $currency = shift;
 
     die "Currency $currency and/or its precision is not defined."
         if ((not defined $currency)
