@@ -9,7 +9,8 @@ price:
   LTC: 8
   ETH: 8
   ETC: 8
-  MKR: 8
+  DAI: 2
+  TUSD: 2
 amount:
   USD: 2
   EUR: 2
@@ -21,5 +22,5 @@ amount:
   LTC: 8
   ETH: 8
   ETC: 8
-  DAI: 8
-  TUSD: 8
+  DAI: 2
+  TUSD: 2
