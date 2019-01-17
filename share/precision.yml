@@ -9,7 +9,6 @@ price:
   LTC: 8
   ETH: 8
   ETC: 8
-  DAI: 2
   UST: 2
   USB: 2
 amount:
@@ -23,6 +22,5 @@ amount:
   LTC: 8
   ETH: 8
   ETC: 8
-  DAI: 2
   UST: 2
   USB: 2
