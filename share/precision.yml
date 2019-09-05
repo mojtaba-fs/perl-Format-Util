@@ -11,6 +11,7 @@ price:
   ETC: 8
   UST: 2
   USB: 2
+  IDK: 2
 amount:
   USD: 2
   EUR: 2
@@ -24,3 +25,5 @@ amount:
   ETC: 8
   UST: 2
   USB: 2
+  IDK: 2
+  
