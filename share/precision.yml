@@ -116,6 +116,7 @@ price:
   NZD: 2
   OMR: 3
   PAB: 2
+  PAX: 2
   PEN: 2
   PGK: 2
   PHP: 2
@@ -291,6 +292,7 @@ amount:
   NZD: 2
   OMR: 3
   PAB: 2
+  PAX: 2
   PEN: 2
   PGK: 2
   PHP: 2
