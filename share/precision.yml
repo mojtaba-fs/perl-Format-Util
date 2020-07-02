@@ -42,6 +42,7 @@ price:
   CUP: 2
   CVE: 2
   CZK: 2
+  DAI: 2
   DJF: 0
   DKK: 2
   DOP: 2
@@ -52,6 +53,7 @@ price:
   ETC: 8
   ETH: 8
   EUR: 2
+  eUSDT: 2
   FJD: 2
   FKP: 2
   GBP: 2
@@ -150,14 +152,17 @@ price:
   TOP: 2
   TRY: 2
   TTD: 2
+  TUSD: 2
   TWD: 2
   TZS: 2
   UAH: 2
   UGX: 0
   USB: 2
   USD: 2
-  USN: 2
+  USDC: 2
+  USDK: 2
   UST: 2
+  USN: 2
   UYI: 0
   UYU: 2
   UYW: 4
@@ -218,6 +223,7 @@ amount:
   CUP: 2
   CVE: 2
   CZK: 2
+  DAI: 2
   DJF: 2
   DKK: 2
   DOP: 2
@@ -228,6 +234,7 @@ amount:
   ETC: 8
   ETH: 8
   EUR: 2
+  eUSDT: 2
   FJD: 2
   FKP: 2
   GBP: 2
@@ -326,14 +333,17 @@ amount:
   TOP: 2
   TRY: 2
   TTD: 2
+  TUSD: 2
   TWD: 2
   TZS: 2
   UAH: 2
   UGX: 2
   USB: 2
   USD: 2
-  USN: 2
+  USDC: 2
+  USDK: 2
   UST: 2
+  USN: 2
   UYI: 2
   UYU: 2
   UYW: 4
