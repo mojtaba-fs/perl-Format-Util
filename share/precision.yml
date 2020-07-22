@@ -24,6 +24,7 @@ price:
   BSD: 2
   BTC: 8
   BTN: 2
+  BUSD: 2
   BWP: 2
   BYN: 2
   BZD: 2
@@ -53,6 +54,7 @@ price:
   ETC: 8
   ETH: 8
   EUR: 2
+  EURS: 2
   eUSDT: 2
   FJD: 2
   FKP: 2
@@ -205,6 +207,7 @@ amount:
   BSD: 2
   BTC: 8
   BTN: 2
+  BUSD: 2
   BWP: 2
   BYN: 2
   BZD: 2
@@ -234,6 +237,7 @@ amount:
   ETC: 8
   ETH: 8
   EUR: 2
+  EURS: 2
   eUSDT: 2
   FJD: 2
   FKP: 2
