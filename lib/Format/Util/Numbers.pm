@@ -12,7 +12,7 @@ use Scalar::Util qw(looks_like_number);
 use POSIX qw(ceil);
 use YAML::XS;
 use File::ShareDir;
-use Math::Round;
+use Math::BigFloat lib => 'Calc';
 
 =head1 NAME
 
@@ -317,10 +317,10 @@ sub get_min_unit {
 sub _round_to_precison {
     my ($precision, $val) = @_;
 
-    my $result = Math::Round::nearest(10**-$precision, $val);
-    # nearest(0.01, 0.501) would be 0.5, but we want "0.50".
-    # note that in this case, sprintf does not do any rounding.
-    return sprintf('%.' . $precision . 'f', $result);
+    my $x = Math::BigFloat->bzero();
+    $x->badd($val)->bfround('-' . $precision, 'common');
+
+    return $x->bstr();
 }
 
 =head1 AUTHOR

@@ -29,6 +29,7 @@ subtest 'roundcommon' => sub {
     cmp_ok(roundcommon(1e-10, 10.56783333331239), '==', 10.5678333333, 'Rounding with exponential precision');
     cmp_ok(roundcommon(0.01,  0.025),             '==', 0.03,          'Correct rounding, round away from zero');
     cmp_ok(roundcommon(0.01,  -0.025),            '==', -0.03,         'Correct rounding, round away from zero');
+    cmp_ok(roundcommon(0.001,  150.9065),         '==', 150.907,       'Correct rounding, handled floating point error');
 };
 
 subtest 'commas' => sub {
