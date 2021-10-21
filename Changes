@@ -2,6 +2,9 @@ Revision history for Format-Util
 
 {{$NEXT}}
 
+0.16      2021-10-21 10:40:10+00:00 UTC
+    Add AAD (antarctica dollar) currency to precision.yml
+
 0.15      2018-09-10 02:01:10+00:00 UTC
     return as string for consistent precision
 
